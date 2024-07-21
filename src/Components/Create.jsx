@@ -7,7 +7,7 @@ const Create = () => {
   const [email, setEmail] = useState();
   const [age, setAge] = useState("");
 
-  const navigate=useNavigate();
+  const navigate = useNavigate();
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -21,30 +21,18 @@ const Create = () => {
       .post("https://669c983a15704bb0e303cbdc.mockapi.io/crud", payload)
       .then((res) => {
         console.log(res.data);
-        navigate("/")
+        navigate("/");
       })
       .catch((err) => console.log(err));
 
-      console.log(payload)
+    console.log(payload);
   };
-
-const handleEdit = () =>{
-
-axios.put("")
-.then((res) =>{
-
-})
-.catch((err) => console.log(err))
-
-
-}
-
 
   return (
     <>
       <div className="row">
         <div className="col-md-4">
-        <div className="mb-3 mt-2">
+          <div className="mb-3 mt-2">
             <Link to="read">
               <button className="btn btn-primary">Read Data</button>
             </Link>
