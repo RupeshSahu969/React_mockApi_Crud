@@ -43,7 +43,7 @@ const Read = () => {
               <button className="btn btn-primary">Create New Data</button>
             </Link>
           </div>
-          <table className="table table-bordered table-striped bg-black">
+          <table className="table table-bordered table-striped">
             <thead>
               <tr>
                 <th>Id</th>

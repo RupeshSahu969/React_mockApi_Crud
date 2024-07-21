@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 
 const Update = () => {
-  const [data, setData] = useState({ name: "", email: "", age: "" });
+  const [data, setData] = useState({});
   const { id } = useParams();
   const navigate = useNavigate();
 
@@ -35,6 +35,7 @@ const Update = () => {
     setData({ ...data, [name]: value });
   };
 
+  
   return (
     <>
       <div className="row">
