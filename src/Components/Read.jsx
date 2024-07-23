@@ -8,26 +8,56 @@ const Read = () => {
   const [data, setData] = useState([]);
   const navigate = useNavigate();
 
-  const handleGetData = () => {
-    axios
-      .get("https://669c983a15704bb0e303cbdc.mockapi.io/crud")
-      .then((res) => {
-        setData(res.data);
-      })
-      .catch((err) => console.log(err));
+  const handleGetData = async() => {
+    // axios
+    //   .get("https://669c983a15704bb0e303cbdc.mockapi.io/crud")
+    //   .then((res) => {
+    //     setData(res.data);
+    //   })
+    //   .catch((err) => console.log(err));
+    try {
+      const res = await fetch("https://669c983a15704bb0e303cbdc.mockapi.io/crud");
+      const result = await res.json();
+      console.log(result)
+      setData(result);
+    } catch (err) {
+      console.log(err);
+    }
+
   };
 
   useEffect(() => {
     handleGetData();
   }, []);
 
-  const handleDelete = (id) => {
-    axios
-      .delete(`https://669c983a15704bb0e303cbdc.mockapi.io/crud/${id}`)
-      .then(() => {
-        handleGetData();
-      })
-      .catch((err) => console.log(err));
+  const handleDelete = async(id) => {
+    // axios
+    //   .delete(`https://669c983a15704bb0e303cbdc.mockapi.io/crud/${id}`)
+    //   .then(() => {
+    //     handleGetData();
+    //   })
+    //   .catch((err) => console.log(err));
+  try{
+    const res= await fetch(`https://669c983a15704bb0e303cbdc.mockapi.io/crud/${id}`, {
+      method:"DELETE",
+      header:{
+        "Content-Type":"application"
+      }
+  
+    })
+    if(res.ok){
+      handleGetData()
+      console.log("Delte")
+    }
+    else{
+      console.log("err")
+    }
+
+  }
+  catch(err){
+    console.log(err)
+  }
+
   };
 
   const handleEdit = (id) => {

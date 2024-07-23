@@ -11,23 +11,52 @@ const Update = () => {
     getData();
   }, [id]);
 
-  const getData = () => {
-    axios
-      .get(`https://669c983a15704bb0e303cbdc.mockapi.io/crud/${id}`)
-      .then((res) => {
-        setData(res.data);
-      })
-      .catch((err) => console.log(err));
-  };
+  const getData = async() => {
+    // axios
+    //   .get(`https://669c983a15704bb0e303cbdc.mockapi.io/crud/${id}`)
+    //   .then((res) => {
+    //     setData(res.data);
+    //   })
+    //   .catch((err) => console.log(err));
 
-  const handleEdit = (e) => {
+    try{
+      const res=await fetch(`https://669c983a15704bb0e303cbdc.mockapi.io/crud/${id}`)
+      const result= await res.json()
+      setData(result)
+
+    }
+    catch(err){
+      console.log("err")
+    }
+
+  };
+  
+
+  const handleEdit = async(e) => {
     e.preventDefault();
-    axios
-      .put(`https://669c983a15704bb0e303cbdc.mockapi.io/crud/${id}`, data)
-      .then(() => {
-        navigate("/read");
-      })
-      .catch((err) => console.log(err));
+    // axios
+    //   .put(`https://669c983a15704bb0e303cbdc.mockapi.io/crud/${id}`, data)
+    //   .then(() => {
+    //     navigate("/read");
+    //   })
+    //   .catch((err) => console.log(err));
+
+    try {
+      const res = await fetch(`https://669c983a15704bb0e303cbdc.mockapi.io/crud/${id}`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      });
+      const result = await res.json();
+      console.log(result);
+      navigate("/read");
+    } catch (err) {
+      console.log("Error:", err);
+    }
+
+
   };
 
   const handleChange = (e) => {

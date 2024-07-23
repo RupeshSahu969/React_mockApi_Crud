@@ -9,7 +9,7 @@ const Create = () => {
 
   const navigate = useNavigate();
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async(e) => {
     e.preventDefault();
 
     const payload = {
@@ -17,15 +17,31 @@ const Create = () => {
       email,
       age,
     };
-    axios
-      .post("https://669c983a15704bb0e303cbdc.mockapi.io/crud", payload)
-      .then((res) => {
-        console.log(res.data);
-        navigate("/");
-      })
-      .catch((err) => console.log(err));
+    // axios
+    //   .post("https://669c983a15704bb0e303cbdc.mockapi.io/crud", payload)
+    //   .then((res) => {
+    //     console.log(res.data);
+    //     navigate("/");
+    //   })
+    //   .catch((err) => console.log(err));
 
-    console.log(payload);
+    // console.log(payload);
+
+    try {
+      const res = await fetch("https://669c983a15704bb0e303cbdc.mockapi.io/crud", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(payload),
+      });
+      const result = await res.json();
+      console.log(result);
+      navigate("/");
+    } catch (err) {
+      console.log(err);
+    }
+
   };
 
   return (
